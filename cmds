@@ -1,11 +1,11 @@
 Fedora
+sudo nano /etc/sudoers
+Defaults env_reset,pwfeedback
+
 sudo nano /etc/dnf/dnf.conf
 max_parallel_downloads=5
 fastestmirror=1
 deltarpm=false
-
-sudo nano /etc/sudoers
-Defaults env_reset,pwfeedback
 
 sudo dnf install curl
 curl -fsS https://dl.brave.com/install.sh | sh
