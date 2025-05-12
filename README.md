@@ -1,0 +1,21 @@
+Fedora
+sudo nano /etc/dnf/dnf.conf
+max_parallel_downloads=5
+fastestmirror=1
+deltarpm=true
+
+sudo nano /etc/sudoers
+Defaults env_reset,pwfeedback
+
+Nvidia drivers
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda
+sudo dnf install vulkan-loader vulkan-loader.i686
+sudo dnf install vulkan vulkan-loader vulkan-loader.i686 mesa-vulkan-drivers mesa-vulkan-drivers.i686
+sudo dnf install nvidia-settings
+
+sudo dnf install gstreamer1-{libav,plugins-{good,ugly,bad{-free,-nonfree}}}
+sudo dnf install libdvdread libdvdnav lsdvd
+sudo dnf install unrar p7zip p7zip-plugins file-roller
+unrar x archivo.rar.part1
+
