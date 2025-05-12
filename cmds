@@ -2,10 +2,13 @@ Fedora
 sudo nano /etc/dnf/dnf.conf
 max_parallel_downloads=5
 fastestmirror=1
-deltarpm=true
+deltarpm=false
 
 sudo nano /etc/sudoers
 Defaults env_reset,pwfeedback
+
+sudo dnf install curl
+curl -fsS https://dl.brave.com/install.sh | sh
 
 Nvidia drivers
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
