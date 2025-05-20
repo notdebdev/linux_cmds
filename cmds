@@ -23,3 +23,6 @@ sudo dnf install gstreamer1-{libav,plugins-{good,ugly,bad{-free,-nonfree}}}
 sudo dnf install libdvdread libdvdnav lsdvd
 sudo dnf install unrar p7zip p7zip-plugins file-roller
 unrar x archivo.rar.part1
+
+sudo dnf install steam
+steam --reset
