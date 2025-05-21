@@ -1,0 +1,16 @@
+Crear particion
+  sudo gdisk /dev/sdX
+  n
+  enter
+  enter
+  enter
+  enter
+  w
+  y
+  sudo mkfs.ext4 /dev/sdX
+  sudo partprobe /dev/sdX
+
+Montar discos
+  sudo mkdir /mnt/sdXX
+  sudo mount /dev/sdXX mnt/sdXX
+
