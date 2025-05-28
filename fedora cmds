@@ -29,5 +29,8 @@ unrar x archivo.rar.part1
 sudo dnf install steam
 steam --reset
 
+sudo dnf copr enable atim/heroic-games-launcher
+sudo dnf install heroic-games-launcher-bin
+
 forzar ejecutar en grafica dedicada
 __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json %command%
