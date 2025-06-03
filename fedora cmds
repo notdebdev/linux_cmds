@@ -32,5 +32,10 @@ steam --reset
 sudo dnf copr enable atim/heroic-games-launcher
 sudo dnf install heroic-games-launcher-bin
 
+Davinci Resolve
+sudo dnf install libxcrypt-compat libcurl libcurl-devel apr apr-util fuse-libs mesa-libGLU zlib --allowerasing
+cd a la carpeta donde se descompactó: SKIP_PACKAGE_CHECK=1 ./davinci_resolve_20.0_Linux.run
+cd /opt/resolve/libs && sudo mkdir disabled-libraries $$ sudo mv libglib* libgio* libgmodule* disabled-libraries
+
 forzar ejecutar en grafica dedicada
 __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json %command%
