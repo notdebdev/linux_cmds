@@ -1,4 +1,3 @@
-Fedora
 sudo nano /etc/sudoers
 Defaults env_reset,pwfeedback
 
@@ -7,37 +6,33 @@ max_parallel_downloads=5
 fastestmirror=1
 deltarpm=false
 
+RPM fusion
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf update @core
 sudo dnf swap ffmpeg-free ffmpeg --allowerasing
 sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+
+Intel drivers
 sudo dnf install intel-media-driver
 
+Amd drivers
 sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
 sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
 sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
 sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
 
-sudo dnf install libva-nvidia-driver
-sudo dnf install libva-nvidia-driver.{i686,x86_64}
-
-
-sudo dnf update
-
-sudo dnf install curl
 curl -fsS https://dl.brave.com/install.sh | sh
 
 Nvidia drivers
-
 sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda
 sudo dnf install vulkan-loader vulkan-loader.i686
 sudo dnf install vulkan vulkan-loader vulkan-loader.i686 mesa-vulkan-drivers mesa-vulkan-drivers.i686
 sudo dnf install nvidia-settings
+sudo dnf install libva-nvidia-driver
+sudo dnf install libva-nvidia-driver.{i686,x86_64}
 
-sudo dnf install gstreamer1-{libav,plugins-{good,ugly,bad{-free,-nonfree}}}
-sudo dnf install libdvdread libdvdnav lsdvd
-sudo dnf install unrar p7zip p7zip-plugins file-roller
+sudo dnf install unrar
 unrar x archivo.rar.part1
 
 sudo dnf install steam
