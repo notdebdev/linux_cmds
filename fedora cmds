@@ -48,3 +48,7 @@ cd /opt/resolve/libs && sudo mkdir disabled-libraries $$ sudo mv libglib* libgio
 
 forzar ejecutar en grafica dedicada
 __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json %command%
+
+gnome tray icons
+sudo dnf install gnome-extensions-app
+https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
