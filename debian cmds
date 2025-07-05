@@ -1,0 +1,14 @@
+sudo nano/etc/sudoers
+  envreset,pwfeedback
+
+sudo nano /etc/default/grub
+  timeout=2
+  quiet splash
+sudo update-grub
+
+sudo apt install ffmpeg libavcodec-extra gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-pulseaudio vorbis-tools
+
+sudo apt install curl
+curl -fsS https://dl.brave.com/install.sh | sh
+
+
