@@ -5,6 +5,8 @@ sudo nano /etc/dnf/dnf.conf
 max_parallel_downloads=5
 fastestmirror=1
 
+sudo dnf update
+
 curl -fsS https://dl.brave.com/install.sh | sh
 
 RPM fusion
