@@ -6,6 +6,16 @@ sudo firewall-cmd --add-port=9000/tcp --permanent
 sudo firewall-cmd --add-port=9443/tcp --permanent
 sudo firewall-cmd --reload
 
+curl -s -L https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo | \
+sudo tee /etc/yum.repos.d/nvidia-container-toolkit.repo
+
+export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.17.8-1
+  sudo dnf install -y \
+      nvidia-container-toolkit-${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+      nvidia-container-toolkit-base-${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+      libnvidia-container-tools-${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+      libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+
 sudo podman volume create portainer_data
 sudo podman run -d -p 9443:9443 --name portainer --restart always \
   -v /var/run/docker.sock:/var/run/docker.sock \
