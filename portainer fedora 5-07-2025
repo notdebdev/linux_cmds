@@ -16,14 +16,14 @@ export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.17.8-1
       libnvidia-container-tools-${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
       libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
 
-sudo podman volume create portainer_data
 sudo podman run -d -p 9443:9443 --name portainer --restart always \
-  -v /var/run/docker.sock:/var/run/docker.sock \
   -v /run/podman/podman.sock:/run/podman/podman.sock \
   -v portainer_data:/data \
   --privileged \
-  --network host \
   docker.io/portainer/portainer-ce:latest
+
+Entrar a https://localhost:9443, crear contraseña de admin, import environment, podman, socket, poner nombre, override defaul socket path = /run/podman/podman.sock
+
 
 sudo podman volume create ollama_data
 sudo podman run -d \
@@ -33,8 +33,3 @@ sudo podman run -d \
   ollama/ollama
 
 
-sudo podman run -d -p 9443:9443 --name portainer --restart always \
-  -v /run/podman/podman.sock:/run/podman/podman.sock \
-  -v portainer_data:/data \
-  --privileged \
-  docker.io/portainer/portainer-ce:latest
