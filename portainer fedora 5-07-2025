@@ -14,3 +14,10 @@ Instalación SearXNG
     debug: false
     servername: "mi_searxng_local" # Puedes cambiar esto por el nombre que quieras o tu IP
     secret_key: "CAMBIA_ESTO_POR_UNA_CADENA_ALEATORIA_LARGA_Y_SEGURA"
+
+podman run -d \
+  --name searxng \
+  -p 8888:8080 \
+  -v ~/searxng/settings:/etc/searxng/settings:Z \
+  -v ~/searxng/data:/var/cache/searxng:Z \
+  docker.io/searxng/searxng:latest
