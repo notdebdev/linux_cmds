@@ -21,3 +21,6 @@ podman run -d \
   -v ~/searxng/settings:/etc/searxng/settings:Z \
   -v ~/searxng/data:/var/cache/searxng:Z \
   docker.io/searxng/searxng:latest
+
+Si no se ve SearXNG en containers
+  echo $XDG_RUNTIME_DIR/podman/podman.sock
