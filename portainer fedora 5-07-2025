@@ -1,4 +1,16 @@
-systemctl enable --now podman.socket
-podman volume create portainer_data
-sudo podman run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always --privileged -v /run/podman/podman.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
-https://localhost:9443
+Instalacion portainer
+  systemctl enable --now podman.socket
+  podman volume create portainer_data
+  sudo podman run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always --privileged -v /run/podman/podman.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+  https://localhost:9443
+
+Instalación SearXNG
+  mkdir -p ~/searxng/settings
+  mkdir -p ~/searxng/data
+  podman pull docker.io/searxng/searxng:latest
+  nano ~/searxng/settings/settings.yml
+  # ~/searxng/settings/settings.yml
+  general:
+    debug: false
+    servername: "mi_searxng_local" # Puedes cambiar esto por el nombre que quieras o tu IP
+    secret_key: "CAMBIA_ESTO_POR_UNA_CADENA_ALEATORIA_LARGA_Y_SEGURA"
