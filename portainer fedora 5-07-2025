@@ -31,3 +31,10 @@ sudo podman run -d \
   --name ollama \
   -v ollama_data:/root/.ollama \
   ollama/ollama
+
+
+sudo podman run -d -p 9443:9443 --name portainer --restart always \
+  -v /run/podman/podman.sock:/run/podman/podman.sock \
+  -v portainer_data:/data \
+  --privileged \
+  docker.io/portainer/portainer-ce:latest
