@@ -33,3 +33,9 @@ sudo podman run -d \
   ollama/ollama
 
 
+sudo podman run -d \
+  -p 11434:11434 \
+  --name ollama \
+  -v ollama_data:/root/.ollama \
+  --gpus all \
+  ollama/ollama
