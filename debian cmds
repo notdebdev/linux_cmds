@@ -11,6 +11,7 @@ sudo apt install ffmpeg libavcodec-extra gstreamer1.0-libav gstreamer1.0-plugins
 sudo apt install curl
 curl -fsS https://dl.brave.com/install.sh | sh
 
+sudo nano /etc/apt/sources.list
 # Main Debian Trixie repositories
 deb http://deb.debian.org/debian/ trixie main contrib non-free non-free-firmware
 deb-src http://deb.debian.org/debian/ trixie main contrib non-free non-free-firmware
