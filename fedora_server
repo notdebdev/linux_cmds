@@ -2,3 +2,47 @@ curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/s
 sudo firewall-cmd --add-port=3000/tcp --permanent
 sudo firewall-cmd --add-port=53/tcp --permanent
 sudo firewall-cmd --add-port=53/udp --permanent
+sudo firewall-cmd --add-service=dns --permanent
+sudo firewall-cmd --add-service=http --permanent
+sudo firewall-cmd --add-service=https --permanent
+sudo firewall-cmd --reload
+
+This happens because the port 53 on localhost, which is used for DNS, is already taken by another program. Ubuntu comes with a local DNS called systemd-resolved, which uses the address 127.0.0.53:53, thus preventing AdGuard Home from binding to 127.0.0.1:53. You can see this by running:
+
+sudo lsof -i :53
+
+The output should be similar to:
+
+COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME
+systemd-r 14542 systemd-resolve 13u IPv4 86178 0t0 UDP 127.0.0.53:domain
+systemd-r 14542 systemd-resolve 14u IPv4 86179 0t0 TCP 127.0.0.53:domain
+
+To fix this, you must either disable the systemd-resolved daemon or choose a different network interface and bind your AdGuard Home to an accessible IP address on it, such as the IP address of your router inside your network. But if you do need to listen on localhost, there are several solutions.
+
+Firstly, AdGuard Home can detect such configurations and disable systemd-resolved for you if you press the Fix button located next to the address already in use message on the installation screen.
+
+Secondly, if that doesn’t work, follow the instructions below. Note that if you’re using AdGuard Home with docker or snap, you’ll have to do this yourself.
+
+Create the /etc/systemd/resolved.conf.d directory, if necessary:
+
+sudo mkdir -p /etc/systemd/resolved.conf.d
+
+Deactivate DNSStubListener and update DNS server address. To do that, create a new file, /etc/systemd/resolved.conf.d/adguardhome.conf, with the following content:
+
+[Resolve]
+DNS=127.0.0.1
+DNSStubListener=no
+
+Specifying 127.0.0.1 as the DNS server address is necessary. Otherwise the nameserver will be 127.0.0.53 which won’t work without DNSStubListener.
+
+Activate another resolv.conf file:
+
+sudo mv /etc/resolv.conf /etc/resolv.conf.backup
+sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+Restart DNSStubListener:
+
+sudo systemctl reload-or-restart systemd-resolved
+
+After that, systemd-resolved shouldn’t be shown in the output of lsof, and AdGuard Home should be able to bind to 127.0.0.1:53.
+
