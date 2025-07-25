@@ -62,3 +62,7 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_ICD_FILENAMES=
 gnome tray icons
 sudo dnf install gnome-extensions-app
 https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
+
+sudo firewall-cmd --add-port=3000/tcp --permanent
+                           puerto/tcp o udp
+
