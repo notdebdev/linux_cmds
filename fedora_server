@@ -1,3 +1,4 @@
+Instalar gnome desktop
 sudo dnf install @gnome-desktop
 sudo dnf install gdm
 sudo systemctl set-default multi-user.target
@@ -10,3 +11,16 @@ Ctrl + Alt + F2
 sudo systemctl stop gdm
 
 
+Podman
+Habilitar cockpit
+sudo dnf install cockpit-podman
+sudo systemctl enable --now cockpit.socket
+sudo systemctl enable --now podman.socket
+sudo firewall-cmd --add-service=cockpit --permanent
+sudo firewall-cmd --reload
+systemctl status podman.service
+systemctl status podman.socket
+
+podman pull adguard/adguardhome
+podman pull jellyfin/jellyfin
+podman pull dperson/samba
