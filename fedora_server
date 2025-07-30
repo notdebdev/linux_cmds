@@ -24,3 +24,4 @@ systemctl status podman.socket
 podman pull adguard/adguardhome
 podman pull jellyfin/jellyfin
 podman pull dperson/samba
+podman pull nextcloud:stable-fpm-alpine
