@@ -1,4 +1,10 @@
-Instalar gnome desktop
+--Habilitar RPM fusion, instalar codecs, driver intel--
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf swap ffmpeg-free ffmpeg --allowerasing
+sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf install intel-media-driver
+
+--Instalar gnome desktop--
 sudo dnf install @gnome-desktop
 sudo dnf install gdm
 sudo systemctl set-default multi-user.target
@@ -10,8 +16,18 @@ sudo systemctl start gdm
 Ctrl + Alt + F2
 sudo systemctl stop gdm
 
+--Jellyfin nativo--
+sudo dnf install jellyfin
+sudo systemctl enable --now jellyfin
+sudo firewall-cmd --permanent --add-port=8096/tcp
+sudo firewall-cmd --reload
+sudo chown -R jellyfin:jellyfin /mnt/media
+sudo chmod -R 755 /mnt/media
+sudo usermod -aG <usuario>
+sudo setfacl -R -m u:jellyfin:rx /mnt/media
 
-Podman
+
+--Podman--
 Habilitar cockpit
 sudo dnf install cockpit-podman
 sudo systemctl enable --now cockpit.socket
@@ -24,4 +40,3 @@ systemctl status podman.socket
 podman pull adguard/adguardhome
 podman pull jellyfin/jellyfin
 podman pull dperson/samba
-podman pull nextcloud:stable-fpm-alpine
