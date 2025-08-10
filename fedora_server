@@ -7,9 +7,6 @@ sudo dnf install intel-media-driver
 --Instalar gnome desktop--
 sudo dnf install @gnome-desktop
 sudo dnf install gdm
-sudo systemctl set-default multi-user.target
-sudo systemctl disable gdm
-sudo restorecon -Rv /home
 sudo reboot
 
 sudo systemctl start gdm
