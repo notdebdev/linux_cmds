@@ -6,26 +6,14 @@ sudo dnf install intel-media-driver
 
 --Instalar gnome desktop--
 sudo dnf install @gnome-desktop
-sudo dnf install gdm
 sudo reboot
 
 sudo systemctl start gdm
 Ctrl + Alt + F2
 sudo systemctl stop gdm
 
---Jellyfin nativo--
-sudo dnf install jellyfin
-sudo systemctl enable --now jellyfin
-sudo firewall-cmd --permanent --add-port=8096/tcp
-sudo firewall-cmd --reload
-sudo chown -R jellyfin:jellyfin /mnt/media
-sudo chmod -R 755 /mnt/media
-sudo usermod -aG <usuario>
-sudo setfacl -R -m u:jellyfin:rx /mnt/media
-
-
---Podman--
-Habilitar cockpit
+<<Podman>>
+--Habilitar cockpit--
 sudo dnf install cockpit-podman
 sudo systemctl enable --now cockpit.socket
 sudo systemctl enable --now podman.socket
@@ -34,6 +22,42 @@ sudo firewall-cmd --reload
 systemctl status podman.service
 systemctl status podman.socket
 
-podman pull adguard/adguardhome
-podman pull jellyfin/jellyfin
-podman pull dperson/samba
+--Jellyfin Podman--
+mkdir -p ~/podman/jellyfin/{config,cache,}
+sudo chown -R USUARIO:USUARIO ~/podman/jellyfin
+
+podman run -d \
+  --name jellyfin \
+  --hostname jellyfin \
+  -e PUID=$(id -u fedora) \
+  -e PGID=$(id -g fedora) \
+  -p 8096:8096 \
+  -p 8920:8920 \
+  -v /home/fedora/podman/jellyfin/config:/config:Z \
+  -v /home/fedora/podman/jellyfin/cache:/cache:Z \
+  -v /mnt/XXXX:/media \
+  --restart=unless-stopped \
+  docker.io/jellyfin/jellyfin
+
+podman generate systemd --name jellyfin --files
+systemctl --user daemon-reload
+systemctl --user enable --now container-jellyfin.service
+mkdir -p ~/.config/systemd/user/
+mv /home/fedora/container-jellyfin.service ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now container-jellyfin.service
+podman ps -> ya viendo que esta healthy agregar reglas de firewall
+sudo firewall-cmd --add-port=8096/tcp --permanent
+sudo firewall-cmd --add-port=8920/tcp --permanent
+sudo firewall-cmd --reload
+
+
+--Jellyfin nativo--
+sudo dnf install jellyfin
+sudo systemctl enable --now jellyfin
+sudo firewall-cmd --permanent --add-port=8096/tcp
+sudo firewall-cmd --reload
+sudo chown -R jellyfin:jellyfin /mnt/media
+sudo chmod -R 755 /mnt/media
+sudo usermod -aG <USUARIO>
+sudo setfacl -R -m u:jellyfin:rx /mnt/media
