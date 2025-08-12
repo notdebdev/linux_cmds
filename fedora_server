@@ -7,10 +7,17 @@ sudo dnf install intel-media-driver
 --Instalar gnome desktop--
 sudo dnf install @gnome-desktop
 sudo reboot
-
 sudo systemctl start gdm
 Ctrl + Alt + F2
 sudo systemctl stop gdm
+
+--Instalar KDE Plasma--
+sudo dnf install @kde-desktop sddm
+sudo reboot
+sudo systemctl start sddm
+Ctrl + Alt + F2
+sudo systemctl stop sddm
+
 
 <<Podman>>
 --Jellyfin--
@@ -48,7 +55,7 @@ sudo dnf install jellyfin
 sudo systemctl enable --now jellyfin
 sudo firewall-cmd --permanent --add-port=8096/tcp
 sudo firewall-cmd --reload
-sudo chown -R jellyfin:jellyfin /mnt/media
+sudo chown -R jellyfin:jellyfin /mnt/XXXX
 sudo chmod -R 755 /mnt/media
 sudo usermod -aG <USUARIO>
-sudo setfacl -R -m u:jellyfin:rx /mnt/media
+sudo setfacl -R -m u:jellyfin:rx /mnt/XXXX
