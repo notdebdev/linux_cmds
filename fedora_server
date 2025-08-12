@@ -1,22 +1,28 @@
 --Habilitar RPM fusion, instalar codecs, driver intel--
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf swap ffmpeg-free ffmpeg --allowerasing
-sudo dnf install intel-media-driver vlc
+sudo dnf install intel-media-driver vlc flatpak
+
 
 --Instalar gnome desktop--
 sudo dnf install @gnome-desktop
 sudo reboot
 sudo systemctl start gdm
+sudo dnf install gnome-software-plugin-flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 Ctrl + Alt + F2
 sudo systemctl stop gdm
+sudo reboot
 
 --Instalar KDE Plasma--
 sudo dnf install @kde-desktop sddm
 sudo reboot
 sudo systemctl start sddm
+sudo dnf install plasma-discover-backend-flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 Ctrl + Alt + F2
 sudo systemctl stop sddm
-
+sudo reboot
 
 <<Podman>>
 --Jellyfin--
