@@ -9,7 +9,7 @@ sudo dnf install @gnome-desktop
 sudo reboot
 sudo systemctl start gdm
 sudo dnf install gnome-software-plugin-flatpak
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo reboot
 Ctrl + Alt + F2
 sudo systemctl stop gdm
 sudo reboot
@@ -19,7 +19,7 @@ sudo dnf install @kde-desktop sddm
 sudo reboot
 sudo systemctl start sddm
 sudo dnf install plasma-discover-backend-flatpak
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo reboot
 Ctrl + Alt + F2
 sudo systemctl stop sddm
 sudo reboot
