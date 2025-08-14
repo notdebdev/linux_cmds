@@ -6,9 +6,11 @@ sudo nano /etc/default/grub
   quiet splash
 sudo update-grub
 
-sudo apt install ffmpeg libavcodec-extra gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-pulseaudio vorbis-tools
+sudo apt install ffmpeg libavcodec-extra gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-pulseaudio vorbis-tools curl vlc
 
-sudo apt install curl
+sudo apt install gnome-extensions-app
+https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
+
 curl -fsS https://dl.brave.com/install.sh | sh
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 curl -s https://repo.jellyfin.org/install-debuntu.sh | sudo bash
