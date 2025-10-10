@@ -8,10 +8,48 @@ sudo update-grub
 
 sudo apt install ffmpeg libavcodec-extra gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-pulseaudio vorbis-tools curl vlc
 
+Iconos de notificacion en Gnome desktop
 sudo apt install gnome-extensions-app
 https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
 
+Instalción de navegador Brave
 curl -fsS https://dl.brave.com/install.sh | sh
+
+Instalación de Adguard
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
+
+Instalación de Jellyfin
 curl -s https://repo.jellyfin.org/install-debuntu.sh | sudo bash
    sudo systemctl start jellyfin.service
+
+Instalación de Docker
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+sudo usermod -aG $USER
+
+Instalación de Immich
+mkdir ./immich-app
+cd ./immich-app
+wget -O docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
+wget -O .env https://github.com/immich-app/immich/releases/latest/download/example.env
+nano .env
+En la linea UPLOAD_LOCATION= cambiar por el disco a usar
+En la linea de DB_PASSWORD= cambiar por una contraseña segura
+sudo docker compose up -d
+
+Revisar que este arriba el servicio:
+http://ip_de_la_maquina:2283
