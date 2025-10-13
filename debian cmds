@@ -47,7 +47,7 @@ cd ./immich-app
 wget -O docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
 wget -O .env https://github.com/immich-app/immich/releases/latest/download/example.env
 nano .env
-En la linea UPLOAD_LOCATION= apuntar a la carpeta/disco que se va a usar
+En la linea UPLOAD_LOCATION=/mnt/sdXX/Immich
 En la linea de DB_PASSWORD= cambiar por una contraseña segura
 sudo docker compose up -d
 
