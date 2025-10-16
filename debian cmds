@@ -21,6 +21,9 @@ curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/s
 Instalación de Jellyfin
 curl -s https://repo.jellyfin.org/install-debuntu.sh | sudo bash
    sudo systemctl start jellyfin.service
+sudo usermod -a -G $(id -gn) jellyfin
+sudo chown -R jellyfin:jellyfin /mnt/sda1/
+sudo chmod -R 777 /mnt/sda1/
 
 Instalación de Docker
 # Add Docker's official GPG key:
