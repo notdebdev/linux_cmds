@@ -6,7 +6,21 @@ sudo nano /etc/default/grub
   quiet splash
 sudo update-grub
 
+# Repositorios Oficiales Debian 13 (Trixie)
+deb http://deb.debian.org/debian/ trixie main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ trixie main contrib non-free non-free-firmware
+
+# Actualizaciones de Seguridad
+deb http://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware
+deb-src http://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware
+
+# Actualizaciones del Sistema (Updates)
+deb http://deb.debian.org/debian/ trixie-updates main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ trixie-updates main contrib non-free non-free-firmware
+
+sudo apt install firmware-linux-nonfree firmware-misc-nonfree
 sudo apt install ffmpeg libavcodec-extra gstreamer1.0-libav gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-pulseaudio vorbis-tools curl vlc
+sudo apt install intel-media-va-driver-non-free libva-glx2 libva-x11-2 vainfo
 
 Iconos de notificacion en Gnome desktop
 sudo apt install gnome-extensions-app
