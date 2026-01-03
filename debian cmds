@@ -6,6 +6,7 @@ sudo nano /etc/default/grub
   quiet splash
 sudo update-grub
 
+sudo nano /etc/apt/sources.list
 # Repositorios Oficiales Debian 13 (Trixie)
 deb http://deb.debian.org/debian/ trixie main contrib non-free non-free-firmware
 deb-src http://deb.debian.org/debian/ trixie main contrib non-free non-free-firmware
