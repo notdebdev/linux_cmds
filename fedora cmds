@@ -48,6 +48,8 @@ unrar x archivo.rar.part1
 sudo dnf install steam
 steam --reset
 
+sudo dnf copr enable faugus/faugus-launcher
+sudo dnf install faugus-launcher
 sudo dnf copr enable atim/heroic-games-launcher
 sudo dnf install heroic-games-launcher-bin
 
