@@ -53,6 +53,16 @@ sudo dnf install faugus-launcher
 sudo dnf copr enable atim/heroic-games-launcher
 sudo dnf install heroic-games-launcher-bin
 
+sudo dnf install lgogdownloader
+# Autenticarse
+lgogdownloader --login
+# Ver tu biblioteca completa
+lgogdownloader --list
+# Bajar un juego específico
+lgogdownloader --download --game "cyberpunk"
+# Bajar solo para Linux (si existe versión nativa)
+lgogdownloader --download --game "cyberpunk" --platform l
+
 Davinci Resolve
 sudo dnf install libxcrypt-compat libcurl libcurl-devel apr apr-util fuse-libs mesa-libGLU zlib --allowerasing
 cd a la carpeta donde se descompactó: SKIP_PACKAGE_CHECK=1 ./davinci_resolve_20.0_Linux.run
