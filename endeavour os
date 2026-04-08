@@ -1,0 +1,17 @@
+Instalaciones desde AUR
+yay -S brave-bin faugus-launcher discord spu-scree-recorder-git davinci-resolve umu-launcher
+
+Instalaciones desde repo oficial
+sudo pacman -S steam mangohud wine wine-tricks vlc vlc-plugin-ffmpeg libva-utils fastfetch
+
+Habilitar bluetooth
+sudo systemctl enable --now bluetooth
+
+Montaje hdd
+mkdir /mnt/sdaX
+lsblk -f -> copiar uuid y filesystem
+sudo nano /etc/fstab
+UUID=el-uuid-largo    /mnt/sdaX    filesystem    defaults    0 0
+guardar cambios
+sudo systemctl daemon-reload
+sudo mount -a
