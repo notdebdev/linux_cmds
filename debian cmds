@@ -143,3 +143,22 @@ services:
       - 53:53/udp
       - 3000:3000/tcp
     restart: always
+
+Instalacion transmission web
+services:
+  transmission:
+    container_name: transmission
+    image: lscr.io/linuxserver/transmission:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Mexico_City
+    volumes:
+      - ./config:/config
+      - /mnt/sda1/Torrents:/downloads
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: always
+
