@@ -129,3 +129,17 @@ services:
     ports:
       - 8096:8096
     restart: always
+
+Instalacion de adguard
+services:
+  adguard:
+    container_name: adguard
+    image: adguard/adguardhome:latest
+    volumes:
+      - ./work:/opt/adguardhome/work
+      - ./conf:/opt/adguardhome/conf
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 3000:3000/tcp
+    restart: always
