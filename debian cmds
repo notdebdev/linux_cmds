@@ -39,12 +39,45 @@ sudo usermod -aG docker $USER
 Instalación de Immich
 mkdir ./immich-app
 cd ./immich-app
-wget -O docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
-wget -O .env https://github.com/immich-app/immich/releases/latest/download/example.env
-nano .env
-En la linea UPLOAD_LOCATION=/mnt/sdXX/Immich-app
-En la linea de DB_PASSWORD= cambiar por una contraseña segura
+ls -l /dev/dri/renderD128
+getent group render | cut -d: -f3
+
+sudo nano docker-compose.yml
+services:
+  immich-server:
+    container_name: immich_server
+    image: ghcr.io/immich-app/immich-server:release
+    devices:
+      - /dev/dri:/dev/dri # Mapeo de hardware de video
+    group_add:
+      - "992" # GID del grupo render en Debian 13
+    volumes:
+      - /mnt/sda1/immich/library:/usr/src/app/upload
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 2283:2283
+    depends_on:
+      - redis
+      - database
+    restart: always
+
+  redis:
+    container_name: immich_redis
+    image: redis:6.2-alpine
+    restart: always
+
+  database:
+    container_name: immich_postgres
+    image: tensorchord/pgvecto-rs:pg16-v0.2.0
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: immich
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    restart: always
 docker compose up -d
+
 Revisar que este arriba el servicio:
 http://ip_de_la_maquina:2283
 
