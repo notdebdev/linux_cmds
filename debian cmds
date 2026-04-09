@@ -113,29 +113,19 @@ http://ip_de_la_maquina:2283
 Instalación de Jellyfin
 mkdir ./jellyfin-app
 cd ./jellyfin-app
-nano docker-compose.yml
-sudo usermod -aG render gray
-newgrp render
-getent group render | cut -d: -f3
-sudo usermod -aG video,render $USER
-sudo chown -R $USER:$USER ~/jellyfin-app
-
+sudo nano docker-compose.yml
 services:
   jellyfin:
-    image: jellyfin/jellyfin:latest
     container_name: jellyfin
-    user: 1000:1000 # <-- AQUÍ pon tu UID y GID que sacaste con 'id'
-    network_mode: host
+    image: jellyfin/jellyfin:latest
     devices:
       - /dev/dri:/dev/dri
     group_add:
-      - 992
+      - "992"
     volumes:
       - ./config:/config
       - ./cache:/cache
-      - /mnt/datos/media:/data
-    restart: unless-stopped
-docker compose up -d
-
-Comprobar uso de quicksync en jellyfin
-docker exec -it jellyfin /usr/lib/jellyfin-ffmpeg/vainfo
+      - /mnt/sda1/Media:/media:ro
+    ports:
+      - 8096:8096
+    restart: always
