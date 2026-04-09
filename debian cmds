@@ -43,40 +43,69 @@ ls -l /dev/dri/renderD128
 getent group render | cut -d: -f3
 
 sudo nano docker-compose.yml
+name: immich
+
 services:
   immich-server:
     container_name: immich_server
-    image: ghcr.io/immich-app/immich-server:release
-    devices:
-      - /dev/dri:/dev/dri # Mapeo de hardware de video
-    group_add:
-      - "992" # GID del grupo render en Debian 13
+    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
     volumes:
-      - /mnt/sda1/immich/library:/usr/src/app/upload
+      - ${UPLOAD_LOCATION}:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
     ports:
-      - 2283:2283
+      - '2283:2283'
     depends_on:
       - redis
       - database
     restart: always
 
+  immich-machine-learning:
+    container_name: immich_machine_learning
+    image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}-openvino
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - "992" # GID grupo render — verifica con: getent group render | cut -d: -f3
+    volumes:
+      - model-cache:/cache
+    env_file:
+      - .env
+    restart: always
+
   redis:
     container_name: immich_redis
-    image: redis:6.2-alpine
+    image: docker.io/valkey/valkey:9
     restart: always
 
   database:
     container_name: immich_postgres
-    image: tensorchord/pgvecto-rs:pg16-v0.2.0
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
     environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: immich
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE_NAME}
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
     restart: always
-docker compose up -d
+
+volumes:
+  model-cache:
+sudo nano .env
+# Ruta donde se guardan las fotos (tu HDD)
+UPLOAD_LOCATION=/mnt/sda1/immich/library
+
+# Ruta donde se guarda la DB (NVMe, no en HDD)
+DB_DATA_LOCATION=./postgres
+
+# Versión (release = última estable)
+IMMICH_VERSION=release
+
+# Base de datos
+DB_PASSWORD=cambiame_password_seguro
+DB_USERNAME=immich
+DB_DATABASE_NAME=immich
 
 Revisar que este arriba el servicio:
 http://ip_de_la_maquina:2283
