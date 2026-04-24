@@ -1,8 +1,8 @@
 Instalaciones desde AUR
-yay -S brave-bin faugus-launcher discord gpu-screen-recorder-git davinci-resolve umu-launcher
+yay -S brave-bin faugus-launcher discord gpu-screen-recorder-git davinci-resolve umu-launcher heroic-games-launcher-bin
 
 Instalaciones desde repo oficial
-sudo pacman -S btop gnome-disk-utility steam mangohud wine vlc vlc-plugin-ffmpeg libva-utils fastfetch
+sudo pacman -S btop gnome-disk-utility steam mangohud wine vlc vlc-plugin-ffmpeg libva-utils fastfetch obs-studio
 
 Habilitar bluetooth
 sudo systemctl enable --now bluetooth
