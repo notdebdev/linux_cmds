@@ -7,7 +7,7 @@ sudo pacman -S btop gnome-disk-utility steam mangohud wine vlc vlc-plugin-ffmpeg
 Habilitar bluetooth
 sudo systemctl enable --now bluetooth
 
-Montaje hdd
+Montaje hdd en fstab, método mas sencillo con gnome-disk-utility
 mkdir /mnt/sdaX
 lsblk -f -> copiar uuid y filesystem
 sudo nano /etc/fstab
