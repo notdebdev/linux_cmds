@@ -87,3 +87,5 @@ yt-dlp \
   --merge-output-format mkv \
   -o "%(uploader)s_%(epoch>%H%M%S)s.%(ext)s" \
   "URL"
+
+yt-dlp -f "bestvideo[height<=480]+bestaudio/best" --hls-use-mpegts --retry-sleep 2 --fragment-retries 30 --no-abort-on-error -o "%(uploader)s_%(epoch>%H%M%S)s.%(ext)s" "URL_DEL_STREAM"
