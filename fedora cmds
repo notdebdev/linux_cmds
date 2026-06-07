@@ -79,3 +79,4 @@ sudo firewall-cmd --add-port=3000/tcp --permanent
                            puerto/tcp o udp
 
 yt-dlp -f "bv*+ba/b" --remux-video mkv -o "%(title)s.%(ext)s" "URL"
+yt-dlp -f "b" --no-part -o "%(title)s.%(ext)s" "URL"
