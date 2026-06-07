@@ -78,5 +78,12 @@ https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
 sudo firewall-cmd --add-port=3000/tcp --permanent
                            puerto/tcp o udp
 
-yt-dlp -f "bv*+ba/b" --remux-video mkv -o "%(title)s.%(ext)s" "URL"
-yt-dlp -f "b" --no-part -o "%(title)s.%(ext)s" "URL"
+yt-dlp \
+  -f "bestvideo[height<=480]+bestaudio" \
+  --hls-use-mpegts \
+  --retry-sleep 2 \
+  --fragment-retries 30 \
+  --no-abort-on-error \
+  --merge-output-format mkv \
+  -o "%(uploader)s_%(epoch>%H%M%S)s.%(ext)s" \
+  "URL"
