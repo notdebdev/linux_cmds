@@ -1,3 +1,5 @@
+sudo podman stop
+
 # Eliminar todos los contenedores
 podman rm -af
 
