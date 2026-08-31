@@ -1,0 +1,11 @@
+
+
+
+# Eliminar todos los contenedores
+podman rm -af
+
+# Eliminar todos los pods
+podman pod rm -af
+
+# Eliminar todas las imágenes
+podman rmi -af
