@@ -44,7 +44,7 @@ ls -l /dev/dri/renderD128
 getent group render | cut -d: -f3
 
 sudo nano docker-compose.yml
-despues de copiar el contenido del yml, ejectuar docker compose up
+despues de copiar el contenido del yml instalar con: docker compose up
 name: immich
 
 services:
