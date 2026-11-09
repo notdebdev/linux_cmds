@@ -1,3 +1,14 @@
+# :penguin: Pasos a seguir después de instalar Fedora
+
+Guía personal de configuración post-instalación para dejar el sistema listo para uso gaming.
+
+---
+
+## 1. Actualizar el sistema
+
+```bash
+sudo dnf upgrade --refresh
+
 sudo nano /etc/sudoers
 Defaults env_reset,pwfeedback
 
